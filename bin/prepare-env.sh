@@ -20,34 +20,30 @@ ln -s /data/data/temp /usr/share/zoneminder/www/temp
   
 echo "Preparing mysql folder"
 if [ ! -d /data/mysql/mysql ]; then
-  echo "Stopping mysql"
-  service mysql stop
-  echo "Moving mysql to data folder"
-  mv /var/lib/mysql /data/
-  ln -s /data/mysql /var/lib/mysql
-  echo "Fix folder permissions"
-  chown -R mysql:mysql /var/lib/mysql
-  chmod -R go+rw /data
-  echo "Restarting mysql"
-  service mysql start  
   echo "Adding default Zoneminder database settings"
   mysql -uroot < /usr/share/zoneminder/db/zm_create.sql 
   mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" 
   echo "Adding improved Zoneminder database settings"
   mysql -uroot < /ZoneminderImprovedDefaults.sql
+  echo "Stopping mysql"
+  service mysql stop
+  echo "Moving mysql to data folder"
+  rm -r /data/mysql
+  cp -p -R /var/lib/mysql /data/
+  rm -r /var/lib/mysql
 else
   echo "Using existing mysql database"
   echo "Stopping mysql"
   service mysql stop
-  rm -r /var/lib/mysql
-  ln -s /data/mysql /var/lib/mysql
-  echo "Fix folder permissions"
-  chown -R mysql:mysql /var/lib/mysql
-  chmod -R go+rw /data
-  echo "Restarting mysql"
-  service mysql start 
+  rm -r /var/lib/mysql 
 fi  
-
+ln -s /data/mysql /var/lib/mysql
+rm /var/lib/mysql/ib_logfile*
+echo "Fix folder permissions"
+chown -R mysql:mysql /var/lib/mysql
+chmod -R go+rw /data
+echo "Restarting mysql"
+service mysql start 
   
 echo "Preparing php.ini"
 if [ ! -f /data/php.ini ]; then
