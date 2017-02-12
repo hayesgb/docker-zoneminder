@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Marco A. Harrendorf <marco+github@harrendorf.net>
 
 VOLUME ["/data"]
