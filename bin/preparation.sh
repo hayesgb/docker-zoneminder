@@ -68,6 +68,15 @@ else
   echo "Missing zoneminder-fullchain.pem, create empty one"
   echo "Add zoneminder-fullchain.pem key in this folder" > /data/ssl-certs/zoneminder-fullchain.pem.missing
 fi
+
+echo "Preparing zm.conf"
+if [ ! -f /data/zm.conf ]; then
+  echo "Copying default zm.conf"
+  mv  /etc/zm/zm.conf /data/zm.conf
+else
+  echo "zm.conf already exists"
+fi
+ln -s /data/zm.conf /etc/zm/zm.conf
   
 echo "Fix folder permissions"
 chown -R mysql:mysql /var/lib/mysql
@@ -77,25 +86,14 @@ chmod 740 /etc/zm/zm.conf
 chown root:www-data /etc/zm/zm.conf 
 chown -R www-data:www-data /usr/share/zoneminder/ 
 
-  
-  
-  
-  
-  #Get docker env timezone and set system timezone
-  echo "setting the correct local time"
-  echo $TZ > /etc/timezone
-  export DEBCONF_NONINTERACTIVE_SEEN=true DEBIAN_FRONTEND=noninteractive
-  dpkg-reconfigure tzdata
-  
-  #fix memory issue
-  echo "increasing shared memory"
-  umount /dev/shm
-  mount -t tmpfs -o rw,nosuid,nodev,noexec,relatime,size=${MEM:-4096M} tmpfs /dev/shm
+#fix memory issue
+echo "increasing shared memory"
+umount /dev/shm
+mount -t tmpfs -o rw,nosuid,nodev,noexec,relatime,size=${MEM:-4096M} tmpfs /dev/shm
 
 echo "Cleaning default apache web folder"
 rm -rf /var/www/html/*
 touch /var/www/html/index.html
-
 
 echo "Restarting MySQL"
 systemctl restart mysql 
