@@ -37,8 +37,6 @@ RUN adduser www-data video
 ADD plugins/cambozola.jar /usr/share/zoneminder/www/cambozola.jar
 ADD configs/ZoneminderImprovedDefaults.sql /ZoneminderImprovedDefaults.sql
 
-ADD configs/mysql.cnf /etc/mysql/conf.d/mysql.cnf
-
 ADD bin/prepare-env.sh /prepare-env.sh
 RUN chmod +x /prepare-env.sh
 
