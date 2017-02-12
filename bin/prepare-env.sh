@@ -20,6 +20,8 @@ ln -s /data/data/temp /usr/share/zoneminder/www/temp
   
 echo "Preparing mysql folder"
 if [ ! -d /data/mysql/mysql ]; then
+  echo "Starting mysql"
+  service mysql start
   echo "Adding default Zoneminder database settings"
   mysql -uroot < /usr/share/zoneminder/db/zm_create.sql 
   mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" 
@@ -28,7 +30,6 @@ if [ ! -d /data/mysql/mysql ]; then
   echo "Stopping mysql"
   service mysql stop
   echo "Moving mysql to data folder"
-  rm -r /data/mysql
   cp -p -R /var/lib/mysql /data/
   rm -r /var/lib/mysql
 else
