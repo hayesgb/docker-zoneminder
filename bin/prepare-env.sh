@@ -9,9 +9,9 @@ if [ ! -d /data/data ]; then
   mkdir /data/data/temp
 else
   echo "Using existing data directory"
-  mv /usr/share/zoneminder/www/events /data/data/
-  mv /usr/share/zoneminder/www/images /data/data/
-  mv /usr/share/zoneminder/www/temp /data/data/
+  rm -r /usr/share/zoneminder/www/events
+  rm -r /usr/share/zoneminder/www/images
+  rm -r /usr/share/zoneminder/www/temp
 fi
 echo "Linking data directories ..."
 ln -s /data/data/events /usr/share/zoneminder/www/events
@@ -30,7 +30,7 @@ if [ ! -d /data/mysql/mysql ]; then
   mysql -uroot < /ZoneminderImprovedDefaults.sql
 else
   echo "Using existing mysql database"
-  mv /var/lib/mysql /data/
+  rm -r /var/lib/mysql
 fi  
 ln -s /data/mysql /var/lib/mysql
   
@@ -56,6 +56,12 @@ fi
 ln -s /data/perl5/ZoneMinder /usr/share/perl5/ZoneMinder
 
 echo "Preparing SSL cert and key"
+if [ -f /data/ssl-certs ] ; then
+  echo "External ssl-certs directory exists"
+else
+  echo "Missing ssl-certs directory, creating one"
+  mkdir /data/ssl-certs
+fi
 if [ -f /data/ssl-certs/zoneminder-key.pem ] ; then
   echo "External zoneminder-key.pem exists"
   rm -f /data/ssl-certs/zoneminder-key.pem.missing
@@ -68,6 +74,7 @@ if [ -f /data/ssl-certs/zoneminder-fullchain.pem ] ; then
   rm -f /data/ssl-certs/zoneminder-fullchain.pem.missing
 else
   echo "Missing zoneminder-fullchain.pem, create empty one"
+  mkdir -p /data/ssl-certs
   echo "Add zoneminder-fullchain.pem key in this folder" > /data/ssl-certs/zoneminder-fullchain.pem.missing
 fi
 
