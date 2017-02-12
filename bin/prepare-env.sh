@@ -21,7 +21,7 @@ ln -s /data/data/temp /usr/share/zoneminder/www/temp
 echo "Preparing mysql folder"
 if [ ! -d /data/mysql/mysql ]; then
   echo "Starting mysql"
-  service mysql start
+  service mysql restart && sleep 5
   echo "Adding default Zoneminder database settings"
   mysql -uroot < /usr/share/zoneminder/db/zm_create.sql 
   mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" 
@@ -44,7 +44,7 @@ echo "Fix folder permissions"
 chown -R mysql:mysql /var/lib/mysql
 chmod -R go+rw /data
 echo "Restarting mysql"
-service mysql start 
+service mysql restart 
   
 echo "Preparing php.ini"
 if [ ! -f /data/php.ini ]; then
