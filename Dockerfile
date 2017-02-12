@@ -35,6 +35,7 @@ RUN a2enconf zoneminder && \
 RUN adduser www-data video
 
 ADD plugins/cambozola.jar /usr/share/zoneminder/www/cambozola.jar
+ADD configs/ZoneminderImprovedDefaults.sql /ZoneminderImprovedDefaults.sql
 
 ADD bin/prepare-env.sh /prepare-env.sh
 RUN chmod +x /prepare-env.sh
