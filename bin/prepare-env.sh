@@ -21,8 +21,10 @@ ln -s /data/data/temp /usr/share/zoneminder/www/temp
 echo "Preparing mysql folder"
 if [ ! -d /data/mysql/mysql ]; then
   echo "Moving mysql to data folder"
-  rm -r /data/mysql
   cp -p -R /var/lib/mysql /data/
+  rm -r /data/mysql
+  echo "Restarting mysql"
+  service mysql restart  
   echo "Adding default Zoneminder database settings"
   mysql -uroot < /usr/share/zoneminder/db/zm_create.sql 
   mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" 
