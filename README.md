@@ -17,9 +17,9 @@ external storage there ` -v /mnt/twiki:/data`.
 |----------------|--------------------------------------------------------------|
 | data/data      | Contains zoneminder data like events, images, temp           |
 | data/mysql     | Contains MariaDB database files                              |
-| data/ssl-certs | Contains zoneminder-fullchain.pem and zoneminder-key.pem     |
 | data/perl5     | Maps to perl5/ZoneMinder and can contain custom perl scripts |
 | data/php.ini   | Useful to easily change time zone settings                   |
+| data/ssl-certs | Contains zoneminder-fullchain.pem and zoneminder-key.pem     |
 | data/zm.conf   | Useful to easily change basic Zoneminder settings            |
 
 
