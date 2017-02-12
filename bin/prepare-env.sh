@@ -47,6 +47,7 @@ if [ ! -f /data/php.ini ]; then
   sed  -i 's/\;date.timezone =/date.timezone = \"Europe\/Berlin\"/' /data/php.ini 
 else
   echo "php.ini already exists"
+  rm /etc/php/7.0/apache2/php.ini
 fi
 ln -s /data/php.ini /etc/php/7.0/apache2/php.ini
 
@@ -62,7 +63,7 @@ fi
 ln -s /data/perl5/ZoneMinder /usr/share/perl5/ZoneMinder
 
 echo "Preparing SSL cert and key"
-if [ -f /data/ssl-certs ] ; then
+if [ -d /data/ssl-certs ] ; then
   echo "External ssl-certs directory exists"
 else
   echo "Missing ssl-certs directory, creating one"
