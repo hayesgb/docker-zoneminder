@@ -95,12 +95,12 @@ fi
 ln -s /data/zm.conf /etc/zm/zm.conf
   
 echo "Fix folder permissions"
-chown -R mysql:mysql /var/lib/mysql
-chown -R www-data:www-data /data/data
-chmod -R go+rw /data
 chmod 740 /etc/zm/zm.conf 
 chown root:www-data /etc/zm/zm.conf 
 chown -R www-data:www-data /usr/share/zoneminder/ 
+chown -R mysql:mysql /var/lib/mysql
+chown -R www-data:www-data /data/data
+chmod -R a+rwx /data
 
 #fix memory issue
 echo "increasing shared memory"
