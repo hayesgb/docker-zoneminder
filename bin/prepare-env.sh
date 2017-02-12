@@ -37,12 +37,12 @@ ln -s /data/mysql /var/lib/mysql
 echo "Preparing php.ini"
 if [ ! -f /data/php.ini ]; then
   echo "Copying default php.ini and set time zone to Europe Berlin"
-  mv  /etc/php5/apache2/php.ini /data/php.ini
+  mv  /etc/php/7.0/apache2/php.ini /data/php.ini
   sed  -i 's/\;date.timezone =/date.timezone = \"Europe\/Berlin\"/' /data/php.ini 
 else
   echo "php.ini already exists"
 fi
-ln -s /data/php.ini /etc/php5/apache2/php.ini
+ln -s /data/php.ini /etc/php/7.0/apache2/php.ini
 
 echo "Preparing perl5 folder"
 if [ ! -d /data/perl5 ]; then
@@ -51,7 +51,7 @@ if [ ! -d /data/perl5 ]; then
   cp -R -p /usr/share/perl5/ZoneMinder /data/perl5/
 else
   echo "Using existing perl5 data directory"
-  mv /usr/share/perl5/ZoneMinder /data/perl5/
+  rm -r /usr/share/perl5/ZoneMinder
 fi
 ln -s /data/perl5/ZoneMinder /usr/share/perl5/ZoneMinder
 
@@ -84,13 +84,14 @@ if [ ! -f /data/zm.conf ]; then
   mv  /etc/zm/zm.conf /data/zm.conf
 else
   echo "zm.conf already exists"
+  rm /etc/zm/zm.conf
 fi
 ln -s /data/zm.conf /etc/zm/zm.conf
   
 echo "Fix folder permissions"
+chmod -R go+rw /data
 chown -R mysql:mysql /var/lib/mysql
 chown -R www-data:www-data /data/data
-chmod -R go+rw /data
 chmod 740 /etc/zm/zm.conf 
 chown root:www-data /etc/zm/zm.conf 
 chown -R www-data:www-data /usr/share/zoneminder/ 
@@ -105,8 +106,7 @@ rm -rf /var/www/html/*
 touch /var/www/html/index.html
 
 echo "Restarting MySQL"
-systemctl restart mysql 
+service mysql restart
 
 echo "Enabling Zoneminder"
-systemctl enable zoneminder
-systemctl start zoneminder
+service zoneminder restart
