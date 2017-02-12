@@ -39,12 +39,6 @@ else
   rm -r /var/lib/mysql 
 fi  
 ln -s /data/mysql /var/lib/mysql
-rm /var/lib/mysql/ib_logfile*
-echo "Fix folder permissions"
-chown -R mysql:mysql /var/lib/mysql
-chmod -R go+rw /data
-echo "Restarting mysql"
-service mysql restart 
   
 echo "Preparing php.ini"
 if [ ! -f /data/php.ini ]; then
