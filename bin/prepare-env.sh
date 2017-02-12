@@ -22,7 +22,7 @@ echo "Preparing mysql folder"
 if [ ! -d /data/mysql/mysql ]; then
   echo "Moving mysql to data folder"
   cp -p -R /var/lib/mysql /data/
-  rm -r /data/mysql
+  rm -r /var/lib/mysql
   echo "Restarting mysql"
   service mysql restart  
   echo "Adding default Zoneminder database settings"
@@ -91,9 +91,9 @@ fi
 ln -s /data/zm.conf /etc/zm/zm.conf
   
 echo "Fix folder permissions"
-chmod -R go+rw /data
 chown -R mysql:mysql /var/lib/mysql
 chown -R www-data:www-data /data/data
+chmod -R go+rw /data
 chmod 740 /etc/zm/zm.conf 
 chown root:www-data /etc/zm/zm.conf 
 chown -R www-data:www-data /usr/share/zoneminder/ 
