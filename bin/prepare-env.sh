@@ -39,7 +39,16 @@ else
   rm -r /var/lib/mysql 
 fi  
 ln -s /data/mysql /var/lib/mysql
-  
+
+echo "Checking if improved MySQL config is available"
+if [ ! -d /data/mysql/MySQLConfigImproved ]; then
+  echo "Adding improved MySQL config"
+  echo "sql_mode = NO_ENGINE_SUBSTITUTION" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+  touch /data/mysql/MySQLConfigImproved
+else
+  echo "Existing improved MySQL config"
+fi
+
 echo "Preparing php.ini"
 if [ ! -f /data/php.ini ]; then
   echo "Copying default php.ini and set time zone to Europe Berlin"
