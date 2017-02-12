@@ -26,6 +26,8 @@ if [ ! -d /data/mysql/mysql ]; then
   service mysql stop
   rm -r /var/lib/mysql
   ln -s /data/mysql /var/lib/mysql
+  echo "Fix folder permissions"
+  chown -R mysql:mysql /var/lib/mysql
   echo "Restarting mysql"
   service mysql start  
   echo "Adding default Zoneminder database settings"
@@ -39,6 +41,8 @@ else
   service mysql stop
   rm -r /var/lib/mysql
   ln -s /data/mysql /var/lib/mysql
+  echo "Fix folder permissions"
+  chown -R mysql:mysql /var/lib/mysql
   echo "Restarting mysql"
   service mysql start 
 fi  
