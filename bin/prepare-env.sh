@@ -29,16 +29,16 @@ if [ ! -d /data/mysql/mysql ]; then
   mysql -uroot < /ZoneminderImprovedDefaults.sql
   echo "Stopping mysql"
   service mysql stop
-  echo "Moving mysql to data folder"
-  cp -p -R /var/lib/mysql /data/
-  rm -r /var/lib/mysql
+  #echo "Moving mysql to data folder"
+  #cp -p -R /var/lib/mysql /data/
+  #rm -r /var/lib/mysql
 else
   echo "Using existing mysql database"
   echo "Stopping mysql"
   service mysql stop
-  rm -r /var/lib/mysql 
+  #rm -r /var/lib/mysql 
 fi  
-ln -s /data/mysql /var/lib/mysql
+#ln -s /data/mysql /var/lib/mysql
   
 echo "Preparing php.ini"
 if [ ! -f /data/php.ini ]; then
