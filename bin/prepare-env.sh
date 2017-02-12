@@ -22,9 +22,12 @@ echo "Preparing mysql folder"
 if [ ! -d /data/mysql/mysql ]; then
   echo "Moving mysql to data folder"
   cp -p -R /var/lib/mysql /data/
+  echo "Stopping mysql"
+  service mysql stop
   rm -r /var/lib/mysql
+  ln -s /data/mysql /var/lib/mysql
   echo "Restarting mysql"
-  service mysql restart  
+  service mysql start  
   echo "Adding default Zoneminder database settings"
   mysql -uroot < /usr/share/zoneminder/db/zm_create.sql 
   mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" 
@@ -32,9 +35,14 @@ if [ ! -d /data/mysql/mysql ]; then
   mysql -uroot < /ZoneminderImprovedDefaults.sql
 else
   echo "Using existing mysql database"
+  echo "Stopping mysql"
+  service mysql stop
   rm -r /var/lib/mysql
+  ln -s /data/mysql /var/lib/mysql
+  echo "Restarting mysql"
+  service mysql start 
 fi  
-ln -s /data/mysql /var/lib/mysql
+
   
 echo "Preparing php.ini"
 if [ ! -f /data/php.ini ]; then
