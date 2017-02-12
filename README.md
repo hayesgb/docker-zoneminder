@@ -30,7 +30,7 @@ external storage there ` -v /mnt/twiki:/data`.
 * On first start, open zoneminder settings, go to the paths tab and enter the following for PATH_ZMS: ```/zm/cgi-bin/nph-zms```
 
 ## Change timezone
-* The default timezone for php is set as America/New_York.
+* The default timezone for php is set as Europe/Berlin.
 * If you would like to change the timezone, edit the php.ini in the config folder / data container.
 * Here's a list of available timezone options: http://php.net/manual/en/timezones.php
 
