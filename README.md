@@ -16,18 +16,17 @@ external storage there ` -v /mnt/twiki:/data`.
 | data subfolder |    description                                               |
 |----------------|--------------------------------------------------------------|
 | data/data      | Contains zoneminder data like events, images, temp           |
-| data/mysql     | Contains MariaDB database files                              |
+| data/mysql     | Contains MariaDB database files (not working)                |
 | data/perl5     | Maps to perl5/ZoneMinder and can contain custom perl scripts |
 | data/php.ini   | Useful to easily change time zone settings                   |
 | data/ssl-certs | Contains zoneminder-fullchain.pem and zoneminder-key.pem     |
 | data/zm.conf   | Useful to easily change basic Zoneminder settings            |
 
+* Note: Forwarding MySQL configuration is currently not working. Thus, deactivated.
 
 ## Web GUI
 * The web gui will be available at http://serverip:port/zm
 
-## Important
-* On first start, open zoneminder settings, go to the paths tab and enter the following for PATH_ZMS: ```/zm/cgi-bin/nph-zms```
 
 ## Change timezone
 * The default timezone for php is set as Europe/Berlin.
@@ -35,16 +34,6 @@ external storage there ` -v /mnt/twiki:/data`.
 * Here's a list of available timezone options: http://php.net/manual/en/timezones.php
 
 
-## Activate FFMPEG and Cambozola plugin
-* This container includes ffmpeg and cambozola but they need to be enabled in the settings. 
-* In the WebUI, click on Options in the top right corner and go to the Images tab
-  * Click on the box next to OPT_Cambozola to enable
-  * Click on the box next OPT_FFMPEG to enable ffmpeg
-  * Enter the following for ffmpeg path: /usr/bin/ffmpeg
-  * Enter the following for ffmpeg "output" options: -r 30 -vcodec libx264 -threads 2 -b 2000k -minrate 800k -maxrate 5000k (you can change these options to your liking)
-  * Next to ffmpeg_formats, add mp4 (you can also add a star after mp4 and remove the star after avi to make mp4 the default format)
-  * Hit save
-* Now you should be able to add your cams and record in mp4 x264 format
 
 
 ## Example
