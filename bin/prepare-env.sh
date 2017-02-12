@@ -26,6 +26,8 @@ if [ ! -d /data/mysql/mysql ]; then
   echo "Adding default Zoneminder database settings"
   mysql -uroot < /usr/share/zoneminder/db/zm_create.sql 
   mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" 
+  echo "Adding improved Zoneminder database settings"
+  mysql -uroot < /ZoneminderImprovedDefaults.sql
 else
   echo "Using existing mysql database"
   mv /var/lib/mysql /data/
