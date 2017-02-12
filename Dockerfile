@@ -10,9 +10,9 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && \
     wget \
     apache2 \
     mysql-server \
-    php5 \
-    php5-gd \
-    libapache2-mod-php5 \
+    php \
+    php-gd \
+    libapache2-mod-php \
     usbutils \
     vlc \
     libvlc-dev \
