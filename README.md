@@ -1,4 +1,4 @@
-# Zoneminder 1.29
+# Docker-Zoneminder
 A Dockerized Zoneminder
 * Version 1.30
 * Following features are enabled by default
@@ -9,6 +9,19 @@ A Dockerized Zoneminder
 ## USAGE
 All Data will be stored under `/data`. You should attach some
 external storage there ` -v /mnt/twiki:/data`.
+
+## Data container
+* The data container is used to store the most important Zoneminder configurations in subfolders
+
+| data subfolder |    description                                               |
+|----------------|--------------------------------------------------------------|
+| data/data      | Contains zoneminder data like events, images, temp           |
+| data/mysql     | Contains MariaDB database files                              |
+| data/ssl-certs | Contains zoneminder-fullchain.pem and zoneminder-key.pem     |
+| data/perl5     | Maps to perl5/ZoneMinder and can contain custom perl scripts |
+| data/php.ini   | Useful to easily change time zone settings                   |
+| data/zm.conf   | Useful to easily change basic Zoneminder settings            |
+
 
 ## Web GUI
 * The web gui will be available at http://serverip:port/zm
@@ -51,5 +64,5 @@ docker run --restart=always -dt --privileged=true -p 80:80 -p 443:443 -v /docker
 
 
 ## Note: Forked
-This repository was forked from https://github.com/aptalca/docker-zoneminder/tree/v1.29 and then modified, so that a newer OS, Zoneminder version and so on will be used.
+This repository was forked from https://github.com/aptalca/docker-zoneminder/tree/v1.29 and then modified, so that a newer OS, Zoneminder version, and so on will be used.
 
