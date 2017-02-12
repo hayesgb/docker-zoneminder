@@ -19,7 +19,7 @@ ln -s /data/data/images /usr/share/zoneminder/www/images
 ln -s /data/data/temp /usr/share/zoneminder/www/temp
   
 echo "Preparing mysql folder"
-if [ ! -d /data/mysql/mysql ]; then
+#if [ ! -d /data/mysql/mysql ]; then
   echo "Starting mysql"
   service mysql restart && sleep 5
   echo "Adding default Zoneminder database settings"
@@ -27,17 +27,17 @@ if [ ! -d /data/mysql/mysql ]; then
   mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" 
   echo "Adding improved Zoneminder database settings"
   mysql -uroot < /ZoneminderImprovedDefaults.sql
-  echo "Stopping mysql"
-  service mysql stop
+  #echo "Stopping mysql"
+  #service mysql stop
   #echo "Moving mysql to data folder"
   #cp -p -R /var/lib/mysql /data/
   #rm -r /var/lib/mysql
-else
-  echo "Using existing mysql database"
-  echo "Stopping mysql"
-  service mysql stop
+#else
+ # echo "Using existing mysql database"
+ # echo "Stopping mysql"
+  #service mysql stop
   #rm -r /var/lib/mysql 
-fi  
+#fi  
 #ln -s /data/mysql /var/lib/mysql
   
 echo "Preparing php.ini"
@@ -98,7 +98,7 @@ echo "Fix folder permissions"
 chmod 740 /etc/zm/zm.conf 
 chown root:www-data /etc/zm/zm.conf 
 chown -R www-data:www-data /usr/share/zoneminder/ 
-chown -R mysql:mysql /var/lib/mysql
+#chown -R mysql:mysql /var/lib/mysql
 chown -R www-data:www-data /data/data
 chmod -R a+rwx /data
 
