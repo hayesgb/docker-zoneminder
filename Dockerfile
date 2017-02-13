@@ -34,6 +34,10 @@ RUN a2enconf zoneminder && \
 
 RUN adduser www-data video
 
+ENV TZ=Europe/Berlin
+RUN echo $TZ | tee /etc/timezone && \
+    dpkg-reconfigure --frontend noninteractive tzdata
+
 ADD plugins/cambozola.jar /usr/share/zoneminder/www/cambozola.jar
 ADD configs/ZoneminderImprovedDefaults.sql /ZoneminderImprovedDefaults.sql
 
