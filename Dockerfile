@@ -8,6 +8,8 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && \
     apt-get -y dist-upgrade && \
     apt-get -y install  software-properties-common python-software-properties \
     wget \
+    sudo \
+    nano \
     apache2 \
     mysql-server \
     php \
