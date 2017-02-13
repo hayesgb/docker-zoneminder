@@ -41,7 +41,7 @@ fi
 ln -s /data/mysql /var/lib/mysql
 
 echo "Checking if improved MySQL config is available"
-if [ ! -d /data/mysql/MySQLConfigImproved ]; then
+if [ ! -f /data/mysql/MySQLConfigImproved ]; then
   echo "Adding improved MySQL config"
   echo "sql_mode = NO_ENGINE_SUBSTITUTION" >> /etc/mysql/mysql.conf.d/mysqld.cnf
   touch /data/mysql/MySQLConfigImproved
