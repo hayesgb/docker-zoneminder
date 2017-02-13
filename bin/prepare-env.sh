@@ -7,6 +7,9 @@ if [ ! -d /data/data ]; then
   mkdir /data/data/events
   mkdir /data/data/images
   mkdir /data/data/temp
+  rm -r /usr/share/zoneminder/www/events
+  rm -r /usr/share/zoneminder/www/images
+  rm -r /usr/share/zoneminder/www/temp
 else
   echo "Using existing data directory"
   rm -r /usr/share/zoneminder/www/events
@@ -54,6 +57,7 @@ if [ ! -f /data/php.ini ]; then
   echo "Copying default php.ini and set time zone to Europe Berlin"
   mv  /etc/php/7.0/apache2/php.ini /data/php.ini
   sed  -i 's/\;date.timezone =/date.timezone = \"Europe\/Berlin\"/' /data/php.ini 
+  rm /etc/php/7.0/apache2/php.ini
 else
   echo "php.ini already exists"
   rm /etc/php/7.0/apache2/php.ini
@@ -65,6 +69,7 @@ if [ ! -d /data/perl5 ]; then
   echo "Moving perl5 folder to data folder"
   mkdir /data/perl5
   cp -R -p /usr/share/perl5/ZoneMinder /data/perl5/
+  rm -r /usr/share/perl5/ZoneMinder
 else
   echo "Using existing perl5 data directory"
   rm -r /usr/share/perl5/ZoneMinder
@@ -97,7 +102,8 @@ fi
 echo "Preparing zm.conf"
 if [ ! -f /data/zm.conf ]; then
   echo "Copying default zm.conf"
-  mv  /etc/zm/zm.conf /data/zm.conf
+  cp -p  /etc/zm/zm.conf /data/zm.conf
+  rm /etc/zm/zm.conf
 else
   echo "zm.conf already exists"
   rm /etc/zm/zm.conf
