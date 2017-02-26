@@ -133,7 +133,7 @@ touch /var/www/html/index.html
 echo "Restarting MySQL"
 service mysql restart
 echo "Sleep 5 seconds to wait for MySQL"
-sleep
+sleep 5
 
 echo "Making sure that proper debian-sys-maint password is set for MySQL after mysql folder was changed."
 export DEBIANPASSWORD=`grep -P -m 1 -o 'password =[ ]*\K[a-zA-Z0-9]*' /etc/mysql/debian.cnf`
