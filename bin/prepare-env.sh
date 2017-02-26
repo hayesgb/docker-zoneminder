@@ -137,3 +137,6 @@ echo "flush privileges;" | mysql -uroot
 
 echo "Enabling Zoneminder"
 service zoneminder restart
+
+echo "Remove Apache pid files since it does not like pre-existing ones"
+rm -f /var/run/apache2/apache2.pid
