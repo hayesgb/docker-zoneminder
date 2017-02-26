@@ -132,7 +132,7 @@ service mysql restart
 
 echo "Making sure that proper debian-sys-maint password is set for MySQL after mysql folder was changed."
 export DEBIANPASSWORD=`grep -P -m 1 -o 'password =[ ]*\K[a-zA-Z0-9]*' /etc/mysql/debian.cnf`
-echo "update mysql.user set Password=password('$DEBIANPASSWORD') where User='debian-sys-maint';" | mysql -uroot
+echo "ALTER USER 'debian-sys-maint'@'localhost' IDENTIFIED BY '$DEBIANPASSWORD';" | mysql -uroot
 echo "flush privileges;" | mysql -uroot
 
 echo "Enabling Zoneminder"
