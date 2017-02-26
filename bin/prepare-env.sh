@@ -111,8 +111,11 @@ fi
 ln -s /data/zm.conf /etc/zm/zm.conf
   
 echo "Fix folder permissions"
+chmod 740 /data/zm.conf 
+chown -h root:www-data /data/zm.conf 
 chmod 740 /etc/zm/zm.conf 
-chown root:www-data /etc/zm/zm.conf 
+chown -h root:www-data /etc/zm/zm.conf 
+chown -Rh www-data:www-data /usr/share/zoneminder/ 
 chown -R www-data:www-data /usr/share/zoneminder/ 
 chown -R mysql:mysql /var/lib/mysql
 chown -R www-data:www-data /data/data
