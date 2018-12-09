@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER Marco A. Harrendorf <marco+github@harrendorf.net>
+MAINTAINER Greg Hayes
 
 VOLUME ["/data"]
 
@@ -36,7 +36,7 @@ RUN a2enconf zoneminder && \
 
 RUN adduser www-data video
 
-ENV TZ=Europe/Berlin
+ENV TZ=America/Chicago
 RUN echo $TZ | tee /etc/timezone && \
     dpkg-reconfigure --frontend noninteractive tzdata
 
